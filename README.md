@@ -84,7 +84,7 @@ Here was what I got in the end:
 My next step was to import a fish model and have their position update for every boid.
 I put my model in cmake-build-debug, created the obj, and loaded it in initialiseGL(), and made sure to update the position of each obj for each boid, then draw the objs in the render() function in Flock.cpp.
 I managed to render the objs, they were however rainbow coloured which suggested they had no shader:
-[Iteration3](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration3.mp4)
+[Iteration3](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/edff6943-edc8-41fc-9fbb-fbde171b0318)
 
 Now I just needed to update the fish rotations to match the resulting rotation of the velocity vector, then texture and shade the fish.
 
@@ -129,6 +129,7 @@ https://www.cgtrader.com/free-3d-models/animals/fish/common-carp-fish
 
 OBJ demo:
 https://github.com/NCCA/ObjDemo/blob/main/src/NGLScene.cpp
+https://youtu.be/cWLFi0jSJvA?si=wmuheDWT12snWLsW
 
 QTSliders:
 https://doc.qt.io/qt-6/qslider.html
