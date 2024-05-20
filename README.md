@@ -57,6 +57,8 @@ https://github.com/DrAshBooth/Boids/blob/master/boid.cpp
 Fish model used:
 https://www.cgtrader.com/free-3d-models/animals/fish/common-carp-fish
 
+OBJ demo:
+https://github.com/NCCA/ObjDemo/blob/main/src/NGLScene.cpp
 ### Build
 
 ---
