@@ -7,7 +7,7 @@ This would involve:
 -Importing and objs, and having them follow the fish movement and rotations
 -A UI which allows for dynamic interaction of fish movement
 -The fish to move in a circular motion.
----
+
 ### Explanation of program and algorithm:
 The Craig Reynolds "Boids" flocking system algorithm models the complex flocking behavior of birds, fish or any large number of animals using simple rules applied to a group of entities called "boids".
 Each boid follows these basic rules:
@@ -30,19 +30,14 @@ This program displays a simulation of boids in 3D with fish models, making it lo
 ---
 
 ### Program Structure:
-
-**Boid Struct**
-- Vec3: pos
-- Vec3: velocity
-- Vec3: colour
-- Vec3: acceleration
-- float: maxSpeed
-- float: maxForce
-
-**Flock Class**
-Attributes:
-- std::vector<boid>: boids
-- 
+ 
+ - include:
+    - boid.h - struct for a boid
+    - Flock.h - Flock class
+    - NGLScene.h - NGLScene class, inherits from QOpenGLWindow
+- src:
+    - Flock.cpp - handles all boid movement and rendering
+    - NGLScene.cpp - handles OpenGL, QT window interactions
 
 ### Iterations, Planning and Development
 ---
