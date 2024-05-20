@@ -7,7 +7,7 @@ This would involve:
 -Importing and objs, and having them follow the fish movement and rotations
 -A UI which allows for dynamic interaction of fish movement
 -The fish to move in a circular motion.
-
+---
 ### Explanation of program and algorithm:
 The Craig Reynolds "Boids" flocking system algorithm models the complex flocking behavior of birds, fish or any large number of animals using simple rules applied to a group of entities called "boids".
 Each boid follows these basic rules:
@@ -27,14 +27,30 @@ This program displays a simulation of boids in 3D with fish models, making it lo
 - Alignment Distance: How far each boid affects other boid's alignment (average direction of local flockmates)
 - Cohesion Distance: How far each boid affects other boid's cohesion (direction moving average position of local flockmates)
 
+---
 
-### Iterations and Development
+### Program Structure:
+
+**Boid Struct**
+- Vec3: pos
+- Vec3: velocity
+- Vec3: colour
+- Vec3: acceleration
+- float: maxSpeed
+- float: maxForce
+
+**Flock Class**
+Attributes:
+- std::vector<boid>: boids
+- 
+
+### Iterations, Planning and Development
 ---
 I used Jon Macey's Particle system initially from the template 'BlankNGL', as this already had a great framework for handling large numbers of rendered objects such as particles, it also had a good framework for being able to interact with the scene using mouse controls using QMouseEvents. 
 
 After intitial research and planning, I decided that I needed the following objects & functions:
 
-**Flock class:**
+*Flock class:*
 ---
 - Flock - List of boids in scene
 - boid size
@@ -44,7 +60,7 @@ After intitial research and planning, I decided that I needed the following obje
 - Separation, alignment and cohesion functions - return a vector to add to the velocity for each boid in scene
 - render function - to render the objs for each boids
 
-**Boid class**
+*Boid class*
 ---
 - position - vector
 - velocity - vector
@@ -53,7 +69,7 @@ After intitial research and planning, I decided that I needed the following obje
 - Max force of the boid
 
 After following this tutorial on how to write these three flocking functions: https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2 , refactoring the NGL particle system, and adjusting the needed parameters, I managed to get this:
-[Iteration1](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration1.mp4)
+[Iteration1](https://raw.githubusercontent.com/NCCA/cfgaa24programingassignment-Luc1nd4/main/Videos/Iteration1.mp4?token=GHSAT0AAAAAACSRDIFP4Z2JRNK2V35OIXB6ZSLV55Q)
 
 The boids were following the movement I wanted, there were just a few issues I accounted for upon first getting the movement how I wanted:
 - The boids would go off screen or out of view, so I created a bounding box which reversed the direction of the boids of they were out of scope.
@@ -128,13 +144,13 @@ https://doc.qt.io/qt-6/qboxlayout.html
 
 ---
 
-#### requirement:
+#### Requires:
 `c++ compiler supporting C++17`
 `Qt5 or Qt6`
 `NGL (NCCA Graphics Library)`
 `vcpkg`
 
-to build use:
+For building:
 ```
 mkdir build
 cd build
