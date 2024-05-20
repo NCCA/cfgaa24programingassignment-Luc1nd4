@@ -38,7 +38,7 @@ ngl::Vec3 Flock::separation(const boid& boid)
         {
             ngl::Vec3 diff = boid.pos - other.pos;
             diff.normalize();
-            diff /= d; // Weight by distance
+            diff /= d;
             steer += diff;
             count++;
         }

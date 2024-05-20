@@ -13,7 +13,8 @@ This would involve:
 I used Jon Macey's Particle system initially from the template 'BlankNGL', as this already had a great framework for handling large numbers of rendered objects such as particles, it also had a good framework for being able to interact with the scene using mouse controls using QMouseEvents. 
 
 After intitial research and planning, I decided that I needed the following objects & functions:
-***Flock class:***
+
+**Flock class:**
 ---
 - Flock - List of boids in scene
 - boid size
@@ -23,7 +24,7 @@ After intitial research and planning, I decided that I needed the following obje
 - Separation, alignment and cohesion functions - return a vector to add to the velocity for each boid in scene
 - render function - to render the objs for each boids
 
-***Boid class***
+**Boid class**
 ---
 - position - vector
 - velocity - vector
@@ -32,7 +33,7 @@ After intitial research and planning, I decided that I needed the following obje
 - Max force of the boid
 
 After following this tutorial on how to write these three flocking functions: https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2 , refactoring the NGL particle system, and adjusting the needed parameters, I managed to get this:
-/home/s5524683/Desktop/CFGAA/cfgaa24programingassignment-Luc1nd4/Videos
+https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration1.mp4
 
 
 
