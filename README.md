@@ -64,7 +64,8 @@ After intitial research and planning, I decided that I needed the following obje
 - Max force of the boid
 
 After following this tutorial on how to write these three flocking functions: https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2 , refactoring the NGL particle system, and adjusting the needed parameters, I managed to get this:
-[Iteration1](https://raw.githubusercontent.com/NCCA/cfgaa24programingassignment-Luc1nd4/main/Videos/Iteration1.mp4?token=GHSAT0AAAAAACSRDIFP4Z2JRNK2V35OIXB6ZSLV55Q)
+
+https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/aad1652c-c01d-4461-af90-1ce8b524d4e7
 
 The boids were following the movement I wanted, there were just a few issues I accounted for upon first getting the movement how I wanted:
 - The boids would go off screen or out of view, so I created a bounding box which reversed the direction of the boids of they were out of scope.
@@ -86,6 +87,7 @@ https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/69d
 My next step was to import a fish model and have their position update for every boid.
 I put my model in cmake-build-debug, created the obj, and loaded it in initialiseGL(), and made sure to update the position of each obj for each boid, then draw the objs in the render() function in Flock.cpp.
 I managed to render the objs, they were however rainbow coloured which suggested they had no shader:
+
 https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/edff6943-edc8-41fc-9fbb-fbde171b0318
 
 Now I just needed to update the fish rotations to match the resulting rotation of the velocity vector, then texture and shade the fish.
