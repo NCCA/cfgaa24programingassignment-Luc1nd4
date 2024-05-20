@@ -1,11 +1,20 @@
 # Lucinda Austin CFGAA Assignment
 
-Assignment Ideas
-
--Soft body simulation on high poly objects
--Reynolds flocking system
 
 
-What I am planning on doing.
-Design of classes / data structures
-How the program will flow
+### Build
+
+---
+
+#### requirement:
+`c++ compiler supporting C++17`
+`Qt5 or Qt6`
+`NGL (NCCA Graphics Library)`
+`vcpkg`
+
+to build use:
+```
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg toolchain location] ..
+cmake --build .
