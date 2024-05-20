@@ -33,7 +33,7 @@ After intitial research and planning, I decided that I needed the following obje
 - Max force of the boid
 
 After following this tutorial on how to write these three flocking functions: https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2 , refactoring the NGL particle system, and adjusting the needed parameters, I managed to get this:
-[Iteration1.mp4]https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration1.mp4
+[Iteration1.mp4](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/)
 
 
 
@@ -46,7 +46,7 @@ https://www.youtube.com/watch?v=15B8qN9dre4
 
 Initial algorithms & tutorial:
 https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2
-Helped understand the three algorithms needed for a believable flocking system: Separation, alignment, and cohesion.
+- Helped understand the three algorithms needed for a believable flocking system: Separation, alignment, and cohesion.
 Although in javascript, this was especially useful to follow upon initial implementation of these three algorithms. I implemented these functions in my Flock class, so that it could loop through all boids in the flock to follow the intended movement in the update() function.
 https://www.youtube.com/watch?v=bqtqltqcQhw
 -First video I watched when trying to implement this program.
