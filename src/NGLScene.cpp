@@ -45,19 +45,7 @@ void NGLScene::initializeGL()
   //Initial settings
   m_flock=std::make_unique<Flock>(300);
 
-  GLuint textureID;
-  glGenTextures(1, &textureID);
-  glBindTexture(GL_TEXTURE_2D, textureID);
 
-
-  ngl::Image textureImage("/home/s5524683/Desktop/CFGAA/labcode-Luc1nd4/BoidsNGL/cmake-build-debug/carp9_carp_BaseColor.1001.png");
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureImage.width(), textureImage.height(), 0, textureImage.format(), GL_UNSIGNED_BYTE, textureImage.getPixels());
-  glGenerateMipmap(GL_TEXTURE_2D);
-
-
-  glBindTexture(GL_TEXTURE_2D, 0);
-
-  m_textureID = textureID;
   ngl::ShaderLib::createShaderProgram("ParticleShader");
   ngl::ShaderLib::attachShader("ParticleVertex", ngl::ShaderType::VERTEX);
   ngl::ShaderLib::attachShader("ParticleFragment", ngl::ShaderType::FRAGMENT);
@@ -80,7 +68,19 @@ void NGLScene::initializeGL()
   ngl::Obj fish("fish.obj", "carp9_carp_BaseColor.1001.png");
   fish.createVAO();
   ngl::VAOPrimitives::loadObj("fish", "fish.obj");
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
+
+    ngl::Image textureImage("/home/s5524683/Desktop/CFGAA/labcode-Luc1nd4/BoidsNGL/cmake-build-debug/carp9_carp_BaseColor.1001.png");
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureImage.width(), textureImage.height(), 0, textureImage.format(), GL_UNSIGNED_BYTE, textureImage.getPixels());
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    m_textureID = textureID;
     //Shaders and perspective
 
   m_view = ngl::lookAt({0,100,100},{0,0,0},{0,1,0});

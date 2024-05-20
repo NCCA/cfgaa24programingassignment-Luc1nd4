@@ -79,7 +79,9 @@ Regardless, I added sliders that returned integers and divided them by 100 to fi
 This however meant I had to create two functions (one in NGLScene.cpp and in Flock.cpp) to pass the values from the main function ->NGLScene ->Flock in order to update them in the functions in Flock.cpp, which is slightly clunky, I would have preferred the updated slider values directly from the main function to the functions in Flock.cpp.
 
 Here was what I got in the end:
-[Iteration2](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration2.mp4)
+
+https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/69db80ec-eb85-49d6-b094-512c67d2e6f6
+
 
 My next step was to import a fish model and have their position update for every boid.
 I put my model in cmake-build-debug, created the obj, and loaded it in initialiseGL(), and made sure to update the position of each obj for each boid, then draw the objs in the render() function in Flock.cpp.
@@ -89,7 +91,8 @@ https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/edf
 Now I just needed to update the fish rotations to match the resulting rotation of the velocity vector, then texture and shade the fish.
 
 After a while of trying different solutions, I added a for loop looping through each boid, normalising the velocity and calculated right and up vectors using cross products. I then created a matrix for the rotation of the fish, then create a matrix for the model, then combine these with the other transformations (_project, _view and _mouse). This is what I got:
-[Iteration4](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration4.mp4)
+
+https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/97799b09-c1a1-4b56-b90a-169c33389c55
 
 There were quite a few problems with this approach, as when combining the mouse rotaton matrix with the model matrix, it doesn't rotate the scene, it rotates the fish, and when I try to pan using the middle mouse, the fish turn into a fish tornado. Which implied that I needed another approach to combining these matricies to the mouse rotation. Without any mouse rotations however, the boids rotate fine and believably. 
 
