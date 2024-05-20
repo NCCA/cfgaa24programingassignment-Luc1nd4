@@ -11,7 +11,7 @@ class Flock {
 public:
     Flock(size_t numBoids);
     void update();
-    void render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint _texture) const;;
+    void render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint _texture, const ngl::Mat4& _mouse) const;;
 
     void setMaxSpeed(int _newBoidMaxSpeed);
     void setMaxForce(int _newBoidMaxForce);

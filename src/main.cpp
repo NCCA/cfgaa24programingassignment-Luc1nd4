@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
   QSlider* boidForceSlider = new QSlider(Qt::Horizontal, &window2);
   boidForceSlider->setRange(10, 100);
-  boidForceSlider->setValue(10);
+  boidForceSlider->setValue(5);
 
   QSlider* boidSpeedSlider = new QSlider(Qt::Horizontal, &window2);
   boidSpeedSlider->setRange(10, 100);
@@ -66,8 +66,8 @@ int main(int argc, char **argv)
   flockDesiredSeparationSlider->setValue(40);
 
   QSlider* flockAlignmentDistSlider = new QSlider(Qt::Horizontal, &window2);
-  flockAlignmentDistSlider->setRange(10, 100);
-  flockAlignmentDistSlider->setValue(10);
+  flockAlignmentDistSlider->setRange(10, 150);
+  flockAlignmentDistSlider->setValue(30);
 
   QSlider* flockCohesionDistSlider = new QSlider(Qt::Horizontal, &window2);
   flockCohesionDistSlider->setRange(10, 100);

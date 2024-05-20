@@ -116,7 +116,7 @@ void NGLScene::paintGL()
   ngl::ShaderLib::setUniform("tex", 0); // Texture unit 0
 
     // Drawing code
-  m_flock->render(m_view, m_project, m_textureID);
+  m_flock->render(m_view, m_project, m_textureID, mouseRotation);
 
     // Unbind the texture
   glBindTexture(GL_TEXTURE_2D, 0);

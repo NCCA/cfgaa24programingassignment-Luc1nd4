@@ -27,6 +27,7 @@ void Flock::initializeBoids()
 
 
 
+// Calculates a force vector that keeps boids separated to avoid crowding neighbors
 ngl::Vec3 Flock::separation(const boid& boid)
 {
     ngl::Vec3 steer(0, 0, 0);
@@ -36,27 +37,30 @@ ngl::Vec3 Flock::separation(const boid& boid)
         float d = (boid.pos - other.pos).length();
         if (d > 0 && d < desiredSeparation)
         {
+            // Vector pointing away from nearby boid
             ngl::Vec3 diff = boid.pos - other.pos;
-            diff.normalize();
-            diff /= d;
-            steer += diff;
-            count++;
+            diff.normalize(); // Normalize to get direction
+            diff /= d; // Inverse weighting by distance
+            steer += diff; // Add direction to steer away
+            count++; // Increment count of too-close boids
         }
     }
     if (count > 0)
     {
-        steer /= static_cast<float>(count);
+        steer /= static_cast<float>(count); // Average the steering over all too-close boids
     }
     if (steer.length() > 0)
     {
-        steer.normalize();
-        steer *= boid.maxSpeed;
-        steer -= boid.velocity;
-        steer.clamp(boid.maxForce);
+        steer.normalize(); // Normalize steering vector
+        steer *= boid.maxSpeed; // Scale to maximum speed
+        steer -= boid.velocity; // Adjust by current velocity
+        steer.clamp(boid.maxForce); // Limit the force by max force
     }
-    return steer;
+    return steer; // Return the steering force
 }
 
+
+// Aligns boid velocity with the average velocity of nearby boids
 ngl::Vec3 Flock::alignment(const boid& boid)
 {
     ngl::Vec3 sum(0, 0, 0);
@@ -66,22 +70,23 @@ ngl::Vec3 Flock::alignment(const boid& boid)
         float d = (boid.pos - other.pos).length();
         if (d > 0 && d < alignmentDist)
         {
-            sum += other.velocity;
-            count++;
+            sum += other.velocity; // Sum up all velocities
+            count++; // Count number of boids within alignment distance
         }
     }
     if (count > 0)
     {
-        sum /= static_cast<float>(count);
-        sum.normalize();
-        sum *= boid.maxSpeed;
-        ngl::Vec3 steer = sum - boid.velocity;
-        steer.clamp(boid.maxForce);
-        return steer;
+        sum /= static_cast<float>(count); // Average the velocity
+        sum.normalize(); // Normalize to get only the direction
+        sum *= boid.maxSpeed; // Scale to maximum speed
+        ngl::Vec3 steer = sum - boid.velocity; // Steering is the difference from current velocity
+        steer.clamp(boid.maxForce); // Limit the steering force
+        return steer; // Return the alignment force
     }
-    return ngl::Vec3(0, 0, 0);
+    return ngl::Vec3(0, 0, 0); // If no nearby boids, no alignment force
 }
 
+// Steers a boid to move towards the average position of nearby boids for cohesion
 ngl::Vec3 Flock::cohesion(const boid& boid)
 {
     ngl::Vec3 sum(0, 0, 0);
@@ -91,17 +96,18 @@ ngl::Vec3 Flock::cohesion(const boid& boid)
         float d = (boid.pos - other.pos).length();
         if (d > 0 && d < cohesionDist)
         {
-            sum += other.pos;
-            count++;
+            sum += other.pos; // Sum up the positions of all nearby boids
+            count++; // Count the number of boids within cohesion distance
         }
     }
     if (count > 0)
     {
-        sum /= static_cast<float>(count);
-        return seek(boid, sum); // A function to steer towards the target position
+        sum /= static_cast<float>(count); // Compute the average position
+        return seek(boid, sum); // Steer towards the average position
     }
-    return ngl::Vec3(0, 0, 0);
+    return ngl::Vec3(0, 0, 0); // If no nearby boids, no cohesion force
 }
+
 
 void Flock::checkBounds(boid& boid)
 {
@@ -163,7 +169,7 @@ ngl::Vec3 Flock::seek(const boid& boid, const ngl::Vec3& target)
 }
 
 
-void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_textureID) const
+void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_textureID, const ngl::Mat4& _mouse) const
 {
     ngl::ShaderLib::use("ParticleShader");
     glActiveTexture(GL_TEXTURE0);
@@ -190,6 +196,7 @@ void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_t
         ngl::Mat4 model;
         model = model.translate(boid.pos.m_x, boid.pos.m_y, boid.pos.m_z);
         model *= rotation;
+
 
         // Combine with other transformations
         ngl::Mat4 MVP = _project * _view * model;
