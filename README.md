@@ -1,6 +1,6 @@
 # Fish Flocking Simulation using Reynolds Flocking Algorithm
 
-My initial idea was
+My initial idea was to create
 
 ### Build
 
