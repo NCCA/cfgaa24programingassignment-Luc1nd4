@@ -108,6 +108,30 @@ ngl::Vec3 Flock::cohesion(const boid& boid)
     return ngl::Vec3(0, 0, 0); // If no nearby boids, no cohesion force
 }
 
+ngl::Vec3 Flock::obstacleAvoidance(const boid& boid)
+{
+    ngl::Vec3 steer(0,0,0);
+    float obstacleRadius = m_obstacleSize / 2.0;
+    ngl::Vec3 diff = boid.pos - m_obstacleCenter;
+    float d = diff.length();
+
+    // Check if the boid is within a dangerous range to the obstacle
+    if (d < obstacleRadius + 5)
+    {
+        diff.normalize();
+        diff /= d; // Weight by distance
+        steer -= diff; // Steer away from the obstacle
+    }
+
+    if (steer.length() > 0)
+    {
+        steer.normalize();
+        steer *= boid.maxSpeed;
+        steer -= boid.velocity;
+        steer.clamp(boid.maxForce);
+    }
+    return steer;
+}
 
 void Flock::checkBounds(boid& boid)
 {
@@ -138,12 +162,14 @@ void Flock::update()
         ngl::Vec3 ali = alignment(boid);
         ngl::Vec3 coh = cohesion(boid);
         ngl::Vec3 circle = seek(boid, circleTarget(boid));
+        ngl::Vec3 avoid = obstacleAvoidance(boid);
 
         // Arbitrarily weighting these forces
         sep *= 2.0f; // Weight for separation might be higher to avoid crowding
         ali *= 2.0f; // Weight for alignment
         coh *= 1.0f; // Weight for cohesion
         circle *= 0.3f;
+        avoid *= 2.0f;
 
         boid.velocity += sep + ali + coh + circle;
         boid.velocity.clamp(boid.maxSpeed);
@@ -172,8 +198,6 @@ ngl::Vec3 Flock::seek(const boid& boid, const ngl::Vec3& target)
 void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_textureID, const ngl::Mat4& _mouse) const
 {
     ngl::ShaderLib::use("ParticleShader");
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_textureID);
     for (const auto& boid : boids) {
         ngl::Vec3 up(0, 1, 0);
         ngl::Vec3 forward = boid.velocity;
@@ -203,6 +227,8 @@ void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_t
         ngl::ShaderLib::setUniform("MVP", MVP);
 
         // Draw the model
+
+        //ngl::ShaderLib::use("ParticleShader");
         ngl::VAOPrimitives::draw(boid.modelID);
     }
 }

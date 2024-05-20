@@ -55,19 +55,19 @@ int main(int argc, char **argv)
 
   QSlider* boidForceSlider = new QSlider(Qt::Horizontal, &UI);
   boidForceSlider->setRange(10, 100);
-  boidForceSlider->setValue(5);
+  boidForceSlider->setValue(10);
 
   QSlider* boidSpeedSlider = new QSlider(Qt::Horizontal, &UI);
   boidSpeedSlider->setRange(10, 100);
-  boidSpeedSlider->setValue(50);
+  boidSpeedSlider->setValue(10);
 
   QSlider* flockDesiredSeparationSlider = new QSlider(Qt::Horizontal, &UI);
   flockDesiredSeparationSlider->setRange(10, 100);
-  flockDesiredSeparationSlider->setValue(40);
+  flockDesiredSeparationSlider->setValue(10);
 
   QSlider* flockAlignmentDistSlider = new QSlider(Qt::Horizontal, &UI);
   flockAlignmentDistSlider->setRange(10, 150);
-  flockAlignmentDistSlider->setValue(30);
+  flockAlignmentDistSlider->setValue(10);
 
   QSlider* flockCohesionDistSlider = new QSlider(Qt::Horizontal, &UI);
   flockCohesionDistSlider->setRange(10, 100);

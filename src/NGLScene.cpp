@@ -45,7 +45,7 @@ void NGLScene::initializeGL()
   //Initial settings
   m_flock=std::make_unique<Flock>(300);
 
-
+  //Shaders and perspective
   ngl::ShaderLib::createShaderProgram("ParticleShader");
   ngl::ShaderLib::attachShader("ParticleVertex", ngl::ShaderType::VERTEX);
   ngl::ShaderLib::attachShader("ParticleFragment", ngl::ShaderType::FRAGMENT);
@@ -54,6 +54,8 @@ void NGLScene::initializeGL()
 
   ngl::ShaderLib::compileShader("ParticleVertex");
   ngl::ShaderLib::compileShader("ParticleFragment");
+
+
   ngl::ShaderLib::attachShaderToProgram("ParticleShader", "ParticleVertex");
   ngl::ShaderLib::attachShaderToProgram("ParticleShader", "ParticleFragment");
 
@@ -64,24 +66,14 @@ void NGLScene::initializeGL()
   ngl::ShaderLib::use(ngl::nglColourShader);
   ngl::ShaderLib::setUniform("Colour", 1.0f, 1.0f, 1.0f, 1.0f);
 
+  ngl::Texture t("textures/carp.png");
 
-  ngl::Obj fish("fish.obj", "carp9_carp_BaseColor.1001.png");
+  ngl::Obj fish("fish.obj", "textures/carp.png");
+  fish.setTexture("textures/carp.png");
+  fish.loadTexture("textures/carp.png");
   fish.createVAO();
   ngl::VAOPrimitives::loadObj("fish", "fish.obj");
-    GLuint textureID;
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
 
-
-    ngl::Image textureImage("/home/s5524683/Desktop/CFGAA/labcode-Luc1nd4/BoidsNGL/cmake-build-debug/carp9_carp_BaseColor.1001.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureImage.width(), textureImage.height(), 0, textureImage.format(), GL_UNSIGNED_BYTE, textureImage.getPixels());
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    m_textureID = textureID;
-    //Shaders and perspective
 
   m_view = ngl::lookAt({0,100,100},{0,0,0},{0,1,0});
   startTimer(10);
@@ -100,26 +92,33 @@ void NGLScene::timerEvent(QTimerEvent *_event)
 
 void NGLScene::paintGL()
 {
-  // clear the screen and depth buffer
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glViewport(0,0,m_win.width,m_win.height);
-  auto rotX = ngl::Mat4::rotateX(m_win.spinXFace);
-  auto rotY = ngl::Mat4::rotateY(m_win.spinYFace);
-  auto mouseRotation = rotX * rotY;
-  mouseRotation.m_m[3][0] = m_modelPos.m_x;
-  mouseRotation.m_m[3][0] = m_modelPos.m_x;
-  mouseRotation.m_m[3][0] = m_modelPos.m_x;
-  ngl::ShaderLib::use("ParticleShader");
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, m_textureID);
-  ngl::ShaderLib::setUniform("MVP", m_project * m_view * mouseRotation);
-  ngl::ShaderLib::setUniform("tex", 0); // Texture unit 0
+    // clear the screen and depth buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glViewport(0,0,m_win.width,m_win.height);
+    auto rotX = ngl::Mat4::rotateX(m_win.spinXFace);
+    auto rotY = ngl::Mat4::rotateY(m_win.spinYFace);
+    auto mouseRotation = rotX * rotY;
+    mouseRotation.m_m[3][0] = m_modelPos.m_x;
+    mouseRotation.m_m[3][0] = m_modelPos.m_x;
+    mouseRotation.m_m[3][0] = m_modelPos.m_x;
+    ngl::ShaderLib::use("ParticleShader");
+    glActiveTexture(GL_TEXTURE0); // Activate texture unit 0
+    glBindTexture(GL_TEXTURE_2D, m_textureID); // Bind the texture to unit 0
+
+    ngl::ShaderLib::use("ParticleShader");
+
+    // Set the MVP uniform as before
+    ngl::ShaderLib::setUniform("MVP", m_project * m_view * mouseRotation);
+
+    // Set the "tex" uniform to texture unit 0
+    int texLoc = glGetUniformLocation(ngl::ShaderLib::getProgramID("ParticleShader"), "tex");
+    glUniform1i(texLoc, 0); // Set the location to texture unit 0 (where the texture is bound)
 
     // Drawing code
-  m_flock->render(m_view, m_project, m_textureID, mouseRotation);
+    m_flock->render(m_view, m_project, m_textureID, mouseRotation);
 
     // Unbind the texture
-  glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
 }
 

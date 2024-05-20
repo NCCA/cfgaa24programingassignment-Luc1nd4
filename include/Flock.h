@@ -21,12 +21,15 @@ public:
 
 private:
     std::vector<boid> boids;
+    ngl::Vec3 obstacleAvoidance(const boid& boid);
+    float m_obstacleSize = 10.0;
+    ngl::Vec3 m_obstacleCenter = ngl::Vec3(0.0, 0.0, 0.0);
     ngl::Vec3 randomVectorOnSphere();
     void initializeBoids();
     ngl::Vec3 separation(const boid& boid);
     float desiredSeparation = 4.0f;
     ngl::Vec3 alignment(const boid& boid);
-    float alignmentDist = 5.0f;
+    float alignmentDist = 10.0f;
     ngl::Vec3 cohesion(const boid& boid);
     float cohesionDist = 3.0f;
     ngl::Vec3 seek(const boid& boid, const ngl::Vec3& target);

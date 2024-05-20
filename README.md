@@ -101,6 +101,7 @@ There were quite a few problems with this approach, as when combining the mouse 
 My next objective is to attach textures to these fish and try fix the mouse rotation issue, or perhaps try another approach to the fish rotation so the matrices combine properly.
 
 
+
 ### Critical Evaluation:
 
 - Optimisation, I would have liked to optimise this program so boids dont have to calculate every other boid in the scene, as this program can handle about 500 boids until the framerate drops, but due to limited time I was unable to implement this for the submission.
@@ -141,6 +142,9 @@ https://doc.qt.io/qt-6/qslider.html
 
 QBoxLayout:
 https://doc.qt.io/qt-6/qboxlayout.html
+
+Textures:
+https://github.com/NCCA/Textures
 ### Build
 
 ---
