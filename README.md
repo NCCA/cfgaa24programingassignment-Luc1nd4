@@ -14,9 +14,19 @@ Each boid follows these basic rules:
 - Separation: Avoid crowding neighbors (local flockmates).
 - Alignment: Steer towards the average heading of local flockmates.
 - Cohesion: Steer towards the average position of local flockmates.
+
 Based on the rules, you would compute the new velocity and position for each boid at each time step. The new velocity is determined by combining the current velocity with the computed velocities from the three rules.
 Additional rules such as collision detection, or extra functions computing boid direction can be added for more effective visuals.
 Each rule is weighted to balance the influence on the boid's movement, ensuring that the behavior looks natural. Adjustments to these weights can vary the flocking dynamics, potentially resulting in different types of collective movement patterns. The overall efficiency and performance of the system can often be optimized by using spatial data structures like octrees or grids to quickly find nearby flockmates without having to check every boid pair. Optimisation using octrees were however slightly out of scope given the time I have with this project, so I wish to implement just the main rules for this project.
+
+This program displays a simulation of boids in 3D with fish models, making it look like a shoal of fish, the program has a UI that allows you to dynamically change values that affect the fish's movemement, for example:
+
+- Max Speed: Will change the overall speed of fish.
+- Max Force: Changes how much each force affects
+- Desired Separation: Desired distance between each boid
+- Alignment Distance: How far each boid affects other boid's alignment (average direction of local flockmates)
+- Cohesion Distance: How far each boid affects other boid's cohesion (direction moving average position of local flockmates)
+
 
 ### Iterations and Development
 ---
@@ -44,6 +54,7 @@ After intitial research and planning, I decided that I needed the following obje
 
 After following this tutorial on how to write these three flocking functions: https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2 , refactoring the NGL particle system, and adjusting the needed parameters, I managed to get this:
 [Iteration1](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration1.mp4)
+
 The boids were following the movement I wanted, there were just a few issues I accounted for upon first getting the movement how I wanted:
 - The boids would go off screen or out of view, so I created a bounding box which reversed the direction of the boids of they were out of scope.
 - They looked a bit more like flies initially, so I attempted to create the function needed to make the boids move in a more circular motion, that calculates a target vector on a sphere given its current spherical coordinates.
@@ -62,7 +73,6 @@ Here was what I got in the end:
 My next step was to import a fish model and have their position update for every boid.
 I put my model in cmake-build-debug, created the obj, and loaded it in initialiseGL(), and made sure to update the position of each obj for each boid, then draw the objs in the render() function in Flock.cpp.
 I managed to render the objs, they were however rainbow coloured which suggested they had no shader:
-
 [Iteration3](https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/blob/main/Videos/Iteration3.mp4)
 
 Now I just needed to update the fish rotations to match the resulting rotation of the velocity vector, then texture and shade the fish.
@@ -79,6 +89,7 @@ My next objective is to attach textures to these fish and try fix the mouse rota
 
 - Optimisation, I would have liked to optimise this program so boids dont have to calculate every other boid in the scene, as this program can handle about 500 boids until the framerate drops, but due to limited time I was unable to implement this for the submission.
 - It would have also been great if I added the ability to change the number of boids in the scene within the GUI, perhaps adding another slider with the number of boids and having a button to reset the scene with the new number of boids.
+- Having a high "maxForce" makes the fish movement look extremely shakey, due to bigger changes in direction, perhaps it would have been better to have another function that dampens this shakey movement, or make the fish lerp throughout each change in direction.
 
 
 ### Research & Annotated bibliography
@@ -87,6 +98,9 @@ My next objective is to attach textures to these fish and try fix the mouse rota
 Intended outcome:
 https://www.youtube.com/watch?v=15B8qN9dre4
 - I wanted the fish to all circle eachother and be able to travel at different speeds.
+
+Website describing the algorithm:
+http://www.red3d.com/cwr/boids/
 
 Initial algorithms & tutorial:
 https://youtu.be/mhjuuHl6qHM?si=eL_OH50BlWzTPAW2

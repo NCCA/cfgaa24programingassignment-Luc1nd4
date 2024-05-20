@@ -45,31 +45,31 @@ int main(int argc, char **argv)
   //UI Window
 
   QApplication app2(argc, argv);
-  QWidget window2;
-  window2.setWindowTitle("Adjust Parameters");
-  window2.resize(200,720);
-  window2.move(1025,25);
-  QVBoxLayout* layout = new QVBoxLayout(&window2);
+  QWidget UI;
+  UI.setWindowTitle("Adjust Parameters");
+  UI.resize(200,720);
+  UI.move(1025,25);
+  QVBoxLayout* layout = new QVBoxLayout(&UI);
 
   //QT Sliders
 
-  QSlider* boidForceSlider = new QSlider(Qt::Horizontal, &window2);
+  QSlider* boidForceSlider = new QSlider(Qt::Horizontal, &UI);
   boidForceSlider->setRange(10, 100);
   boidForceSlider->setValue(5);
 
-  QSlider* boidSpeedSlider = new QSlider(Qt::Horizontal, &window2);
+  QSlider* boidSpeedSlider = new QSlider(Qt::Horizontal, &UI);
   boidSpeedSlider->setRange(10, 100);
   boidSpeedSlider->setValue(50);
 
-  QSlider* flockDesiredSeparationSlider = new QSlider(Qt::Horizontal, &window2);
+  QSlider* flockDesiredSeparationSlider = new QSlider(Qt::Horizontal, &UI);
   flockDesiredSeparationSlider->setRange(10, 100);
   flockDesiredSeparationSlider->setValue(40);
 
-  QSlider* flockAlignmentDistSlider = new QSlider(Qt::Horizontal, &window2);
+  QSlider* flockAlignmentDistSlider = new QSlider(Qt::Horizontal, &UI);
   flockAlignmentDistSlider->setRange(10, 150);
   flockAlignmentDistSlider->setValue(30);
 
-  QSlider* flockCohesionDistSlider = new QSlider(Qt::Horizontal, &window2);
+  QSlider* flockCohesionDistSlider = new QSlider(Qt::Horizontal, &UI);
   flockCohesionDistSlider->setRange(10, 100);
   flockCohesionDistSlider->setValue(10);
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
   layout->addWidget(flockCohesionDistSlider, 0, Qt::AlignTop);
 
   // and finally show
-  window2.show();
+  UI.show();
   window.show();
 
 
