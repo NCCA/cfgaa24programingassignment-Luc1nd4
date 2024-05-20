@@ -1,6 +1,6 @@
-# Lucinda Austin CFGAA Assignment
+# Fish Flocking Simulation using Reynolds Flocking Algorithm
 
-
+My initial idea was
 
 ### Build
 
