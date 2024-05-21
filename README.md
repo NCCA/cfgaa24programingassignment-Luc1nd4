@@ -40,6 +40,8 @@ This program displays a simulation of boids in 3D with fish models, making it lo
 - src:
     - Flock.cpp - handles all boid movement and rendering
     - NGLScene.cpp - handles OpenGL, QT window interactions
+    - NGLSceneMouseControls.cpp - handles all mouse controls
+    - main.cpp - Initialises windows & Dynamically creates QT UI
 
 ### Iterations, Planning and Development
 ---
