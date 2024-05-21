@@ -8,6 +8,8 @@ This would involve:
 -A UI which allows for dynamic interaction of fish movement
 -The fish to move in a circular motion.
 
+https://github.com/NCCA/cfgaa24programingassignment-Luc1nd4/assets/160144414/d63b4828-6c31-4dfc-8444-418273b0119a
+
 ### Explanation of program and algorithm:
 The Craig Reynolds "Boids" flocking system algorithm models the complex flocking behavior of birds, fish or any large number of animals using simple rules applied to a group of entities called "boids".
 Each boid follows these basic rules:
@@ -100,6 +102,12 @@ There were quite a few problems with this approach, as when combining the mouse 
 
 My next objective is to attach textures to these fish and try fix the mouse rotation issue, or perhaps try another approach to the fish rotation so the matrices combine properly.
 
+After days of frustration I have hit a brick wall in terms of the shaders and texturing. I have tried to set the fish as a default uniform colour but no matter how many changes I have tried to make, the models remain rainbow coloured. To my disappointment I don't think I can fix this before submission, which is a big let down as the final outcome would have been a lot better given I figure out the issue with the shaders.
+
+If possible, if any obvious issues are in my shader setup, I wish to know any feedback on why you think this does not work.
+
+I also added an avoidance function, unfortunately I was unable to present this properly with a real object due to time constraints and the shader issue taking up most of my time but, the fish do avoid the centre of the scene at 0, 0, 0.
+
 
 
 ### Critical Evaluation:
@@ -107,6 +115,9 @@ My next objective is to attach textures to these fish and try fix the mouse rota
 - Optimisation, I would have liked to optimise this program so boids dont have to calculate every other boid in the scene, as this program can handle about 500 boids until the framerate drops, but due to limited time I was unable to implement this for the submission.
 - It would have also been great if I added the ability to change the number of boids in the scene within the GUI, perhaps adding another slider with the number of boids and having a button to reset the scene with the new number of boids.
 - Having a high "maxForce" makes the fish movement look extremely shakey, due to bigger changes in direction, perhaps it would have been better to have another function that dampens this shakey movement, or make the fish lerp throughout each change in direction.
+- Having a displayed/rendered object for an obstacle of which the fish avoid, in order to visualise the function.
+- Having predators the fish avoud or an object of which the fish seek.
+- Of course, better visuals, textured fish or a lit scene.
 
 
 ### Research & Annotated bibliography
@@ -145,6 +156,9 @@ https://doc.qt.io/qt-6/qboxlayout.html
 
 Textures:
 https://github.com/NCCA/Textures
+- Helped with non-functioning shader setup
+
+
 ### Build
 
 ---

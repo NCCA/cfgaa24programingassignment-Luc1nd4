@@ -46,31 +46,16 @@ void NGLScene::initializeGL()
   m_flock=std::make_unique<Flock>(300);
 
   //Shaders and perspective
-  ngl::ShaderLib::createShaderProgram("ParticleShader");
-  ngl::ShaderLib::attachShader("ParticleVertex", ngl::ShaderType::VERTEX);
-  ngl::ShaderLib::attachShader("ParticleFragment", ngl::ShaderType::FRAGMENT);
-  ngl::ShaderLib::loadShaderSource("ParticleVertex", "shaders/ParticleVertex.glsl");
-  ngl::ShaderLib::loadShaderSource("ParticleFragment", "shaders/ParticleFragment.glsl");
 
-  ngl::ShaderLib::compileShader("ParticleVertex");
-  ngl::ShaderLib::compileShader("ParticleFragment");
-
-
-  ngl::ShaderLib::attachShaderToProgram("ParticleShader", "ParticleVertex");
-  ngl::ShaderLib::attachShaderToProgram("ParticleShader", "ParticleFragment");
-
-    // link the shader no attributes are bound
-  ngl::ShaderLib::linkProgramObject("ParticleShader");
+  ngl::ShaderLib::loadShader("ParticleShader","shaders/ParticleVertex.glsl","shaders/ParticleFragment.glsl");
   ngl::ShaderLib::use("ParticleShader");
 
-  ngl::ShaderLib::use(ngl::nglColourShader);
-  ngl::ShaderLib::setUniform("Colour", 1.0f, 1.0f, 1.0f, 1.0f);
+  ngl::Texture t("carp.png");
+  m_textureID = t.setTextureGL();
 
-  ngl::Texture t("textures/carp.png");
-
-  ngl::Obj fish("fish.obj", "textures/carp.png");
-  fish.setTexture("textures/carp.png");
-  fish.loadTexture("textures/carp.png");
+  ngl::Obj fish("fish.obj");
+  fish.setTexture("carp.png");
+  fish.loadTexture("carp.png");
   fish.createVAO();
   ngl::VAOPrimitives::loadObj("fish", "fish.obj");
 
@@ -102,6 +87,8 @@ void NGLScene::paintGL()
     mouseRotation.m_m[3][0] = m_modelPos.m_x;
     mouseRotation.m_m[3][0] = m_modelPos.m_x;
     ngl::ShaderLib::use("ParticleShader");
+
+
     glActiveTexture(GL_TEXTURE0); // Activate texture unit 0
     glBindTexture(GL_TEXTURE_2D, m_textureID); // Bind the texture to unit 0
 

@@ -53,7 +53,6 @@ public:
     void setFlockDesiredSeparaion(int _newBoidDesiredSeparation);
     void setFlockAlignmentDist(int _newBoidAlignmentDist);
     void setFlockCohesionDist(int _newBoidCohesionDist);
-
 private:
 
     //----------------------------------------------------------------------------------------------------------------------

@@ -5,6 +5,7 @@
 #include <ngl/ShaderLib.h>
 #include <ngl/VAOFactory.h>
 #include <ngl/VAOPrimitives.h>
+#include <ngl/Texture.h>
 
 
 Flock::Flock(size_t _numBoids)
@@ -116,7 +117,7 @@ ngl::Vec3 Flock::obstacleAvoidance(const boid& boid)
     float d = diff.length();
 
     // Check if the boid is within a dangerous range to the obstacle
-    if (d < obstacleRadius + 5)
+    if (d < obstacleRadius + 30)
     {
         diff.normalize();
         diff /= d; // Weight by distance
@@ -169,9 +170,9 @@ void Flock::update()
         ali *= 2.0f; // Weight for alignment
         coh *= 1.0f; // Weight for cohesion
         circle *= 0.3f;
-        avoid *= 2.0f;
+        avoid *= 0.9f;
 
-        boid.velocity += sep + ali + coh + circle;
+        boid.velocity += sep + ali + coh + circle - avoid;
         boid.velocity.clamp(boid.maxSpeed);
         boid.pos += boid.velocity;
         checkBounds(boid);
@@ -197,7 +198,7 @@ ngl::Vec3 Flock::seek(const boid& boid, const ngl::Vec3& target)
 
 void Flock::render(const ngl::Mat4& _view, const ngl::Mat4& _project, GLuint m_textureID, const ngl::Mat4& _mouse) const
 {
-    ngl::ShaderLib::use("ParticleShader");
+
     for (const auto& boid : boids) {
         ngl::Vec3 up(0, 1, 0);
         ngl::Vec3 forward = boid.velocity;
